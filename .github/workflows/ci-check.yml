@@ -1,0 +1,25 @@
+name: CI Testing Add Autolink
+on: [push]
+
+jobs:
+  read_type:
+    runs-on: ubuntu-latest
+    name: Create Autolink Reference
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_PAT}}
+      - name: Create autolink
+        id: read
+        uses: ./ # Uses an action in the root directory
+        with:
+          token: ${{ secrets.GH_PAT}}
+          keyPrefix: 'ab#'
+          url: 'https://dev.azure.com/Keyfactor/Integration/_workitems/edit/'
+      - name: Display type
+        id: display
+        run: |
+          echo ${{ steps.read.outputs.result}} | tee -a $GITHUB_STEP_SUMMARY
+
+
