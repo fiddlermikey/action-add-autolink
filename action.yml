@@ -1,11 +1,15 @@
-name: 'Get Primary Language'
-description: 'Use the github api to derive the main detected language for the repository'
+name: 'Set Autolink Reference'
+description: 'Use the github api to set an autolink reference for the repository'
 inputs:
   token:
     description: 'GH Token'
+  keyPrefix:
+    description: 'text to be replaced with autolink'
+  url:
+    description: 'url reference for autolink tag'
 outputs:
-  primaryLanguage: 
-    description: 'Detected primary language for the repository'
+  result: 
+    description: 'Status'
 runs:
   using: 'node16'
   main: 'dist/index.js'
